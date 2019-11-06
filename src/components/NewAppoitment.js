@@ -12,7 +12,8 @@ export default class NewAppoitment extends Component {
             time: '',
             symtoms: ''
 
-        }
+        },
+        error: false
     }
 
     handleChange = e => {
@@ -20,6 +21,20 @@ export default class NewAppoitment extends Component {
             ...this.state.appoitment,
             [e.target.name] : e.target.value
         })
+    }
+    
+    handleSubmit = e => {
+        e.preventDefault();
+
+        const {petName,ownerName,date,time,symtoms} = this.state.appoitment
+
+        if(petName==='',ownerName==='',date==='',time==='',symtoms===''){
+            this.setState({
+                error: true
+            })
+        }else{
+            return
+        }
     }
 
     render() {
@@ -30,7 +45,7 @@ export default class NewAppoitment extends Component {
                         Fill the form to create a new appoitment
                     </h2>
 
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group row">
                             <label className="col-sm-4 col-lg-2 col-form-label">
                                 Pet Name
