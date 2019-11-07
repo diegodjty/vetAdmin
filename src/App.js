@@ -4,6 +4,7 @@ import './bootstrap.min.css'
 import Header from './components/Header'
 import NewAppoitment from './components/NewAppoitment';
 import AppoitmentsList from './components/AppoitmentsList';
+import { appendFile } from 'fs';
 
 
 
@@ -13,6 +14,27 @@ export default class App extends Component {
   state={
     appoitments: []
   }
+
+
+    componentDidMount(){
+
+      const appoitmentsLS = localStorage.getItem('appoitments')
+
+      if(appoitmentsLS){
+        this.setState({
+          appoitments: JSON.parse(appoitmentsLS)
+        })
+      }
+
+    }
+
+
+    componentDidUpdate(){
+      localStorage.setItem('appoitments',JSON.stringify(this.state.appoitments))
+    }
+
+
+
 
   createNewAppoitment = data =>{
 
