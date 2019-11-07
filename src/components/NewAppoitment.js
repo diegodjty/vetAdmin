@@ -47,7 +47,7 @@ export default class NewAppoitment extends Component {
             const newAppoitment = {...this.state.appoitment}
             newAppoitment.id = uuid()
 
-            //Sending the data to the parent
+            //Sending the data to the parent (App Component)
             this.props.createNewAppoitment(newAppoitment)
 
             //Reseting the form to the initial state

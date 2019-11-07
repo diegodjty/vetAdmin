@@ -3,6 +3,7 @@ import './bootstrap.min.css'
 
 import Header from './components/Header'
 import NewAppoitment from './components/NewAppoitment';
+import AppoitmentsList from './components/AppoitmentsList';
 
 
 
@@ -22,6 +23,14 @@ export default class App extends Component {
     })
   }
 
+  deleteAppoitment = id =>{
+    const currentappoitments = [...this.state.appoitments]
+    const appoitments = currentappoitments.filter(appoitment => appoitment.id !== id)
+    this.setState({
+      appoitments
+    })
+  }
+
   render(){
     return (
       <div className="container">
@@ -29,11 +38,18 @@ export default class App extends Component {
             title = 'Veterinarian Patients Administrator'
           />
           <div className="row">
-            <div className="col-md10 mx-auto">
+            <div className="col-md-10 mx-auto">
               <NewAppoitment
                 createNewAppoitment = {this.createNewAppoitment}
               />
             </div>
+            <div className="mt-5 col-md-10 mx-auto">
+              <AppoitmentsList
+                appointments={this.state.appoitments}
+                deleteAppoitment={this.deleteAppoitment}
+              />
+            </div>
+              
           </div>
       </div>
     );
